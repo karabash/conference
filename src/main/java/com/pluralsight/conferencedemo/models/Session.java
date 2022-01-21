@@ -11,7 +11,7 @@ JPA  entities to talk the database structure.
  * we called the class name Session bc it will be one instance or row of that data
 */
 @Entity(name="sessions") // sessions is
-public class Session {
+public class Session { // class name is Session bc it will be one instance or row of that data.
     //id annotation specify which attribute is primary key
     //tells JPA that the IDE is primary key field
     @Id
@@ -44,14 +44,14 @@ public class Session {
    we have a basic relationship many to many through
    private List<Session> list;
    */
-    private List<Speaker> list;
+    private List<Speaker> speakers;
 
-    public List<Speaker> getList() {
-        return list;
+    public List<Speaker> getSpeakers() {
+        return speakers;
     }
 
-    public void setList(List<Speaker> list) {
-        this.list = list;
+    public void setSpeakers(List<Speaker> speakers) {
+        this.speakers = speakers;
     }
 
     public Long getSession_id() {
