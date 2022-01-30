@@ -1,9 +1,6 @@
 package com.pluralsight.conferencedemo.models;
-
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "speaksers")
@@ -20,19 +17,19 @@ public class Speaker {
 
     @Lob // large object - helps jpa deal with the larger data
     @Type(type = "org.hibernate.type.BinaryType") // hepls hibranate dealing with binary data,
-    // in our case hibranate is the JPA implementation that we are using under the covers. Without Type annotation
-    //we end end up with an exception whrn jpa queries the data and tries to push it into the Session intstance
+    // in our case hibranate is the JPA implementation that we are using under the covers.
+    // Without Type annotation
+    //we end end up with an exception whrn jpa
+    // queries the data and tries to push it into the Session intstance
 
     /* we are defining here also many to many relationship bc this makes relationship
     bidirectional */
-
     @ManyToMany(mappedBy = "speakers") //refering to the attribute on the Sessions class called the speakers
     @JoinTable(
     name ="session_speakers",
     joinColumns = @JoinColumn(name = "session_id"),
     inverseJoinColumns =  @JoinColumn(name = " speaker_id"))
     private List<Session> sessions;
-
 
     public List<Session> getSessions() {
         return sessions;
@@ -41,19 +38,15 @@ public class Speaker {
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
-
     public String getSpeaker_id() {
         return speaker_id;
     }
-
     public void setSpeaker_id(String speaker_id) {
         this.speaker_id = speaker_id;
     }
-
     public String getFirst_name() {
         return first_name;
     }
-
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
