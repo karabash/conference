@@ -1,4 +1,5 @@
-package com.pluralsight.conferencedemo.models;
+package com.pluralsight.conferenceDemo.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * we called the class name Session bc it will be one instance or row of that data
  */
 @Entity(name = "sessions") // sessions is
+@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
 public class Session { // class name is Session bc it will be one instance or row of that data.
     //id annotation specify which attribute is primary key
     //tells JPA that the IDE is primary key field
@@ -34,6 +36,7 @@ public class Session { // class name is Session bc it will be one instance or ro
     @JoinTable(name = "session_speakers",
             joinColumns = @JoinColumn(name = "session_id"), //defines that join table and the foreign key columns
             inverseJoinColumns = @JoinColumn(name = "speaker_id")) //which
+    private List<Speaker> speakers;
 
 
     /* you need to pick one side of your relationship to be owner
@@ -44,7 +47,6 @@ public class Session { // class name is Session bc it will be one instance or ro
    we have a basic relationship many to many through
    private List<Session> list;
    */
-    private List<Speaker> speakers;
 
     public List<Speaker> getSpeakers() {
         return speakers;

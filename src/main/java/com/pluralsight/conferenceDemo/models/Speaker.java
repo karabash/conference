@@ -1,10 +1,14 @@
-package com.pluralsight.conferencedemo.models;
+package com.pluralsight.conferenceDemo.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "speaksers")
-public class Speaker {
+@Entity(name = "speakers")
+@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
+
+ public class Speaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String speaker_id;
@@ -15,20 +19,9 @@ public class Speaker {
     private String speaker_bio;
     private byte[] speaker_photo;
 
-    @Lob // large object - helps jpa deal with the larger data
-    @Type(type = "org.hibernate.type.BinaryType") // hepls hibranate dealing with binary data,
-    // in our case hibranate is the JPA implementation that we are using under the covers.
-    // Without Type annotation
-    //we end end up with an exception whrn jpa
-    // queries the data and tries to push it into the Session intstance
 
-    /* we are defining here also many to many relationship bc this makes relationship
-    bidirectional */
     @ManyToMany(mappedBy = "speakers") //refering to the attribute on the Sessions class called the speakers
-    @JoinTable(
-    name ="session_speakers",
-    joinColumns = @JoinColumn(name = "session_id"),
-    inverseJoinColumns =  @JoinColumn(name = " speaker_id"))
+    @JsonIgnore
     private List<Session> sessions;
 
     public List<Session> getSessions() {

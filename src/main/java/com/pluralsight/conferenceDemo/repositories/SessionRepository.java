@@ -1,6 +1,6 @@
-package com.pluralsight.conferencedemo.repositories;
+package com.pluralsight.conferenceDemo.repositories;
 
-import com.pluralsight.conferencedemo.models.Session;
+import com.pluralsight.conferenceDemo.models.Session;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SessionRepository  extends JpaRepository<Session, Long> {
